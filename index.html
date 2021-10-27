@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Vue</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <h2>Escriba la fruta que quiere comer</h2>
+        <!--Reemplaza description
+        <input type="text" v-on:input="changeDescr">
+        <p>{{ description }}</p>
+        -->
+        
+        <input type="text" v-model="nuevaFruta" @keyup.enter="agregarFruta">
+                
+        <!--También se puede llamar como v-on:click-->
+        <button @click= "agregarFruta">Agregar fruta</button>            
+        
+        <h1>Aquí va mi array de frutas 🍉 </h1>
+        <ul>
+            <li v-for="fruta of frutas">
+                <input type = "number" v-model.number = "fruta.cantidad">
+                {{fruta.nombre}}
+                <button @click="fruta.cantidad++">+</button>
+                <button @click="fruta.cantidad--">-</button>
+              <span v-if= " fruta.cantidad >=1 && fruta.cantidad < 5"> ¡Quedan menos de 5 unidades, corre por la tuya!</span>
+              <span v-else-if = "fruta.cantidad === 0 ">¡No hay Stock!</span>
+            </li>
+        </ul>
+        <h4>TOTAL: {{sumarFrutas}}</h4>
+        <section class = "container mt-5">
+            <h1>Clases dinámicas con Vue</h1>
+            <!--Insertando clases desde bootstrap (la normal) y desde vue (:class = "['Es obligatoria la comilla simple para poder llamar la clase. Puede ser la clase que yo quiera, o una de bootstrap. Si hay más de una clase, es necesario añadirla como array','aquí va la otra clase', si se le mete algùn paràmtero de data aquí, NO lleva '',]")-->
+            <div :class= "['p-3','text-white', fondo]"> 
+                <p> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi delectus ad, eveniet autem omnis sint consequuntur maiores similique odio, fugiat minus rerum iste ipsam harum. Sed neque fuga natus dicta?   
+                </p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="#0091ff" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z"/>
+              </svg>
+            <input type="text" class= "form-control my-3" v-model="fondo" >
+            <!-- :class= "{'javascript normal,d e toda la vida, aquí hice un if de single line' }" -->
+            <div class="text-white p-3" :class= "{'bg-info':color, 'bg-dark':!color}"> 
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta dignissimos molestiae eaque, minima consectetur perferendis! Delectus consectetur repudiandae tempore minima deleniti officiis praesentium nulla illum, harum, ipsam enim ullam modi!</p>
+
+            </div>
+            <button class= "btn btn-primary" @click="color = !color ">Cambiar color</button>
+        </section>
+    </div> 
+    
+
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>  
+    <script src="./app.js"></script>
+</body>
+</html>
+
+
+
+
